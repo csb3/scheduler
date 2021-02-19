@@ -1,5 +1,4 @@
-export default function getAppointmentsForDay(state, day) {
-  console.log("Day: ", day, "State: ", state);
+const getAppointmentsForDay = function(state, day) {
   let selectedDay;
   let appointments = [];
   for (const stateDay of state.days) {
@@ -16,18 +15,35 @@ export default function getAppointmentsForDay(state, day) {
   return appointments;
 };
 
-export function getInterview(state, interview) {
+const getInterview = function(state, interview) {
   if (interview) {
     for (const interviewer in state.interviewers) {
-      console.log("interviewer: ", interviewer, typeof interviewer);
-      console.log("interview.interviewer: ", interview.interviewer, typeof interview.interviewer);
-      console.log("interviewer === interview.interviewer: ", interviewer === interview.interviewer);
       if (Number(interviewer) === interview.interviewer) {
         const newObject = {...interview};
         newObject.interviewer = state.interviewers[interviewer];
-          return newObject;
+        return newObject;
       }
     }
   }
   return null;
 };
+
+const getInterviewersForDay = function(state, day) {
+  let selectedDay;
+  let interviewers = [];
+  console.log(state);
+  for (const stateDay of state.days) {
+    if (stateDay.name === day) {
+      selectedDay = stateDay;
+    }
+  }
+
+  if (selectedDay) {
+    for (const interviewer of selectedDay.interviewers) {
+    interviewers.push(state.interviewers[interviewer]);
+    }
+  }
+  return interviewers;
+};
+
+export {getInterview, getAppointmentsForDay, getInterviewersForDay};
