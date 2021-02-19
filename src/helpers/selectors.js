@@ -15,3 +15,19 @@ export default function getAppointmentsForDay(state, day) {
   }
   return appointments;
 };
+
+export function getInterview(state, interview) {
+  if (interview) {
+    for (const interviewer in state.interviewers) {
+      console.log("interviewer: ", interviewer, typeof interviewer);
+      console.log("interview.interviewer: ", interview.interviewer, typeof interview.interviewer);
+      console.log("interviewer === interview.interviewer: ", interviewer === interview.interviewer);
+      if (Number(interviewer) === interview.interviewer) {
+        const newObject = {...interview};
+        newObject.interviewer = state.interviewers[interviewer];
+          return newObject;
+      }
+    }
+  }
+  return null;
+};
