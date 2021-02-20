@@ -31,7 +31,6 @@ const getInterview = function(state, interview) {
 const getInterviewersForDay = function(state, day) {
   let selectedDay;
   let interviewers = [];
-  console.log(state);
   for (const stateDay of state.days) {
     if (stateDay.name === day) {
       selectedDay = stateDay;
