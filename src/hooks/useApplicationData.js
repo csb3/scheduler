@@ -11,7 +11,7 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
-  function bookInterview(id, interview) {
+  const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -20,13 +20,16 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const days = updateSpots(state.day, state.days, appointments);
     return axios.put(`/api/appointments/${id}`, {interview})
       .then(() => {
-        setState({...state, appointments});
+        setState((prev) => {
+          return {...prev, appointments, days}
+        });
       })
-  }
+  };
 
-  function cancelInterview(id) {
+  const cancelInterview = function(id) {
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -35,11 +38,26 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const days = updateSpots(state.day, state.days, appointments);
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        setState({...state, appointments});
+        setState((prev) => {
+          return {...prev, appointments, days}});
       })
-  }
+  };
+
+  const updateSpots = function(day, days, appointments) {
+    let spots = 0;
+    const dayObj = days.find(dayEntry => dayEntry.name === day);
+    for (const appointmentID of dayObj.appointments) {
+      if (!appointments[appointmentID].interview) {
+        spots++;
+      }
+    }
+    const newDayObj = { ...dayObj, spots };
+    const newArray =  days.map(item => item.name === day ? newDayObj : item);
+    return newArray;
+  };
 
   useEffect(
     () => {

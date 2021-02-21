@@ -6,7 +6,7 @@ import Appointment from "components/Appointment";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import useApplicationData from "../hooks/useApplicationData";
 
-export default function Application(props) {
+export default function Application() {
   const {
     state,
     setDay,
@@ -16,7 +16,7 @@ export default function Application(props) {
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
-  const schedule = dailyAppointments.map((appointment) => {
+  const schedule = [...dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
   
     return (
@@ -30,7 +30,9 @@ export default function Application(props) {
         cancelInterview={cancelInterview}
       />
     );
-  });
+  }), 
+  <Appointment key="last" time="5pm" />
+  ]
   return (
     <main className="layout">
       <section className="sidebar">

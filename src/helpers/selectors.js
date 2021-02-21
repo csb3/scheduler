@@ -1,6 +1,7 @@
 const getAppointmentsForDay = function(state, day) {
   let selectedDay;
   let appointments = [];
+  
   for (const stateDay of state.days) {
     if (stateDay.name === day) {
       selectedDay = stateDay;
