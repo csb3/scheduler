@@ -2,7 +2,7 @@ import React from "react";
 
 import { render, cleanup } from "@testing-library/react";
 
-import addons, { mockChannel } from '@storybook/addons';
+import addons, { mockChannel } from "@storybook/addons";
 import DayListItem from "components/DayListItem";
 addons.setChannel(mockChannel());
 

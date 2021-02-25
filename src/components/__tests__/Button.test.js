@@ -1,7 +1,7 @@
 import React from "react";
 
 import { render, cleanup, fireEvent } from "@testing-library/react";
-import addons, { mockChannel } from '@storybook/addons';
+import addons, { mockChannel } from "@storybook/addons";
 
 import Button from "components/Button";
 
