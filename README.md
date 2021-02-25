@@ -1,5 +1,8 @@
 # Interview Scheduler
+## Screenshots
 
+!["Main View"](https://github.com/csb3/scheduler/blob/master/docs/main-view.png?raw=true)
+!["Create New Appointment"](https://github.com/csb3/scheduler/blob/master/docs/create-new-appointment.png?raw=true)
 ## Setup
 
 Install dependencies with `npm install`.
